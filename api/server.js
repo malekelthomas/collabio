@@ -3,6 +3,11 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 
+//middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 //import routes
 const usersRoute = require('./routes/users');
 
@@ -17,6 +22,7 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGO_CONNECTION, {useUnifiedTopology:true, useNewUrlParser:true}, () => {
     console.log('Connected to DB!');
 });
+
 
 //listening on server
 app.listen(3000, () => {
