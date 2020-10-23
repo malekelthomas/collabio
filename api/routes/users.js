@@ -28,9 +28,7 @@ router.post('/',  async (req, res) => {
 
     
     try{
-        console.log(user);
-        let savedUser = await user.save();
-        console.log(savedUser)
+        const savedUser = await user.save();
         res.json(savedUser);
     } catch(err) {
         res.json({message: err});
@@ -49,6 +47,8 @@ router.get('/:username', async (req,res) => {
         
     }
 })
+
+
 router.delete('/:username', async (req,res) => {
     try {
         const removedUser = await User.deleteOne({user_name: req.params.username});
@@ -59,6 +59,20 @@ router.delete('/:username', async (req,res) => {
 
     }
 })
+
+router.patch('/:username', async (req,res) => {
+    try {
+        console.log(req.params.username)
+        console.log(req.body.user_name)
+        const updatedUser = await User.updateOne({user_name: req.params.username}, {$set:{"user_name":req.body.user_name}});
+        console.log(updatedUser)
+        res.json(updatedUser)
+    } catch (err) {
+        res.json({message: err});
+
+    }
+})
+
 
 
 
