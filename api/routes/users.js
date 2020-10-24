@@ -60,11 +60,37 @@ router.delete('/:username', async (req,res) => {
     }
 })
 
-router.patch('/:username', async (req,res) => {
+router.patch('/updateUserName/:username', async (req,res) => {
     try {
         console.log(req.params.username)
         console.log(req.body.user_name)
         const updatedUser = await User.updateOne({user_name: req.params.username}, {$set:{"user_name":req.body.user_name}});
+        console.log(updatedUser)
+        res.json(updatedUser)
+    } catch (err) {
+        res.json({message: err});
+
+    }
+})
+
+router.patch('/updateFirstName/:firstname', async (req,res) => {
+    try {
+        console.log(req.params.firstname)
+        console.log(req.body.first_name)
+        const updatedUser = await User.updateOne({first_name: req.params.firstname}, {$set:{"first_name":req.body.first_name}});
+        console.log(updatedUser)
+        res.json(updatedUser)
+    } catch (err) {
+        res.json({message: err});
+
+    }
+})
+
+router.patch('/updateLastName/:lastname', async (req,res) => {
+    try {
+        console.log(req.params.lastname)
+        console.log(req.body.last_name)
+        const updatedUser = await User.updateOne({last_name: req.params.lastname}, {$set:{"last_name":req.body.last_name}});
         console.log(updatedUser)
         res.json(updatedUser)
     } catch (err) {
