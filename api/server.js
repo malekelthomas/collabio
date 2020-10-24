@@ -12,16 +12,17 @@ app.use(cors());
 
 //import routes
 const usersRoute = require('./routes/users');
+//const followersRoute = require('./routes/followers');
 
 app.use('/users', usersRoute);
-
+//app.use('/followers', followersRoute);
 
 //routes
 app.get('/', (req, res) => {
     res.send("We are on home");
 });
 //connect to db
-mongoose.connect(process.env.MONGO_CONNECTION, {useUnifiedTopology:true, useNewUrlParser:true}, () => {
+mongoose.connect(process.env.MONGO_CONNECTION, {useUnifiedTopology:true, useNewUrlParser:true, useFindAndModify:false, useCreateIndex:true}, () => {
     console.log('Connected to DB!');
 });
 
