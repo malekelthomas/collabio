@@ -1,1 +1,10 @@
-<p>users works!</p>
+<h2>My Users</h2>
+<div>
+  <ul class="users">
+    <li *ngFor="let user of users">
+      <p>
+        {{user.user_name | titlecase}} {{user.last_name | titlecase}}
+      </p>
+    </li>
+  </ul>
+</div>
