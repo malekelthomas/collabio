@@ -12,6 +12,8 @@ export class UserService {
 
 
   private usersUrl = 'api/users';
+  private followersUrl = '/followers';
+  private currentUser = 'maleke';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -20,7 +22,11 @@ export class UserService {
   getUsers(): Observable<Object> {
 
       return this.http.get(this.usersUrl, this.httpOptions);
+  }
 
+  getFollowers(): Observable<Object> {
+
+    return this.http.get(`${this.usersUrl}/${this.currentUser}/${this.followersUrl}`);
   }
 
 }

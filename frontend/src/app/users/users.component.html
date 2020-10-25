@@ -1,10 +1,13 @@
 <h2>My Users</h2>
-<div>
-  <ul class="users">
-    <li *ngFor="let user of users">
+<div *ngIf="followers">
+  <ul class="followers">
+    <li *ngFor="let follower of followers">
       <p>
-        {{user.user_name | titlecase}} {{user.last_name | titlecase}}
+        {{follower.user_name | titlecase}} {{follower.last_name | titlecase}}
       </p>
     </li>
   </ul>
+</div>
+<div>
+  <p>You don't have any followers yet</p>
 </div>
