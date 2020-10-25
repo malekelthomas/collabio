@@ -4,12 +4,19 @@ const router = express.Router();
 
 const User = require('../models/User');
 
+//middleware
+const followersRoute = require('./followers');
+const followingRoute = require('./following');
+router.use('/:username/followers', followersRoute);
+router.use('/:username/following', followingRoute);
+
+
 //const crypto = require('crypto');
 router.get('/', async (req, res) => {
     try {
         const users = await User.find()
-        console.log(users)
-        res.json(users)
+        console.log(users);
+        res.json(users);
     } catch (err) {
         res.json({message:err});
     }
