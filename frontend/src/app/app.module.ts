@@ -20,7 +20,7 @@ import { MatListModule } from '@angular/material/list';
   declarations: [
     AppComponent,
     UsersComponent,
-    NavComponent
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

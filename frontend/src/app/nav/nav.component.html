@@ -1,4 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
+
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -26,5 +27,6 @@
         <a mat-list-item href="#">Following</a>
     </mat-toolbar>
     <!-- Add Content Here -->
+    <app-users></app-users>
   </mat-sidenav-content>
 </mat-sidenav-container>
