@@ -1,0 +1,20 @@
+{
+  "name": "collab.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "startAng": "cd frontend && ng serve",
+    "startNode": "cd api && nmp start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malekelthomas/collabio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malekelthomas/collabio/issues"
+  },
+  "homepage": "https://github.com/malekelthomas/collabio#readme"
+}
