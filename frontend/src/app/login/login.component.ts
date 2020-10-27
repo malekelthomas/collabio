@@ -1,3 +1,4 @@
+import { User } from './../user';
 import { Input, EventEmitter, Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../login.service';
@@ -10,7 +11,7 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent implements OnInit {
 
-  loggedIn;
+  loggedIn: User = null;
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
@@ -20,16 +21,18 @@ export class LoginComponent implements OnInit {
   constructor(private loginS: LoginService) { }
 
   ngOnInit(): void {
-    this.submit();
+    this.loggedIn;
   }
 
   @Output() submitEm: EventEmitter<unknown> = new EventEmitter;
   submit() {
     if (this.form.valid) {
       this.submitEm.emit(this.form.value);
-      console.log(this.form.value)
+      this.loginS.login(this.form.value).subscribe(user => console.log(this.loggedIn = user));
     }
   }
+
+
 
 
 }
