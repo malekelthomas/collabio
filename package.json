@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "startAng": "cd frontend && ng serve",
-    "startNode": "cd api && nmp start",
+    "startNode": "cd api && npm start",
     "createComponent": "cd frontend && ng g c",
     "createService": "cd frontend && ng g s"
   },
