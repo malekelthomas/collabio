@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     UsersComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
