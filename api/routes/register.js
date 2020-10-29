@@ -7,6 +7,9 @@ const User = require('../models/User');
 require('dotenv/config');
 
 
+router.get('/', async (req, res) =>{
+
+}); 
 router.post('/', async (req, res) =>{
     try{
         const user = await User.findOne({"email":req.body.email})
@@ -26,7 +29,7 @@ router.post('/', async (req, res) =>{
 
         }
         else{
-            res.json({message:"User exists"})
+            res.json({message:"User exists!"})
         }
 
     }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loggedIn: User = null;
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl('')
   });
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.submitEm.emit(this.form.value);
-      this.loginS.login(this.form.value).subscribe(user => console.log(this.loggedIn = user));
+      this.loginS.login(this.form.value).subscribe();//.subscribe(user => console.log(this.loggedIn = user));
     }
   }
 
