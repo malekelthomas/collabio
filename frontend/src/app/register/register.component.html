@@ -1,27 +1,45 @@
 <mat-card>
   <mat-card-title color="accent">Register</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Email" formControlName="email">
-        </mat-form-field>
+    <div class="form">
+    <div class="exists" *ngIf="registration">
+      <p *ngIf="checkType(registration.message) =='string'" style="color:#ff4081">
+        {{registration.message}} <a routerLink="/login"><button type="submit" mat-button color="accent">Login</button></a>
       </p>
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username">
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
-        </mat-form-field>
-      </p>
-      <div class="button">
-        <button type="submit" mat-button color="accent">Register</button>
+    </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="user_name">
+          </mat-form-field>
+        </p>
+          <p>
+            <mat-form-field>
+              <input type="text" matInput placeholder="First Name" formControlName="first_name">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input type="text" matInput placeholder="Last Name" formControlName="last_name">
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input type="password" matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </p>
+          <div class="button">
+            <button type="submit" mat-button color="accent">Register</button>
+          </div>
+          <span>Already have an account?</span>
+          <a routerLink="/login"><button type="submit" mat-button color="accent">Login</button></a>
+        </form>
       </div>
-        <span>Already have an account?</span>
-        <a routerLink="/login"><button type="submit" mat-button color="accent">Login</button></a>
-    </form>
   </mat-card-content>
 </mat-card>
