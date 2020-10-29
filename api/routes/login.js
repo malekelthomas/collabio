@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
         const user = await User.findOne({"email":req.body.email})
         user.comparePassword(req.body.password, function(err, isMatch){
             if(isMatch){
-                //res.json(user)
                 jwt.sign({user:user},process.env.SECRET_KEY, (err, token) => {
                     res.json({
                         token
@@ -24,20 +23,10 @@ router.post('/', async (req, res) => {
             else{
                 res.json({message:"Login details incorrect."})
             }
-            
         })
-    }
-    catch (err){
+    }catch (err){
         res.json({message:"Login details incorrect."})
-        }
-       
-    /*     if (match){
-            
-        }
-    } catch (err) {
-        res.json({message:err});
     }
- */
 })
 
 module.exports = router;
