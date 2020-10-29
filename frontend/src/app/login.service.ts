@@ -8,17 +8,19 @@ import { catchError, tap, map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LoginService {
-
   constructor(private http: HttpClient) { }
 
+  private token;
   private usersUrl = 'api/users';
+  private loginUrl = 'api/login'
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token')})
   };
 
   login(credentials: User): Observable<User>{
-
-    return this.http.get<User>(`${this.usersUrl}/${credentials.username}`);
+    this.http.post<User>(`${this.loginUrl}`, {email:credentials.email, password:credentials.password})
+      .subscribe(data => localStorage.setItem('token', data.token));
+    return this.http.post<User>(`${this.loginUrl}`, {email:credentials.email, password:credentials.password});
   }
 }
