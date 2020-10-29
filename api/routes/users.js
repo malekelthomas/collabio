@@ -10,7 +10,7 @@ const followingRoute = require('./following');
 router.use('/:username/followers', followersRoute);
 router.use('/:username/following', followingRoute);
 
-
+const auth = require('../auth');
 //const crypto = require('crypto');
 router.get('/', async (req, res) => {
     try {
