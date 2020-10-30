@@ -1,20 +1,28 @@
 <mat-card>
   <mat-card-title color="accent">Login</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Email" formControlName="email">
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
-        </mat-form-field>
-      </p>
-      <div class="button">
-        <button type="submit" mat-button color="accent">Login</button>
+    <div class="form">
+
+      <div class="exists" *ngIf="loggedIn">
+        <p *ngIf="checkType(loggedIn.message) =='string'" style="color:#ff4081">
+          {{loggedIn.message}}
+        </p>
       </div>
-    </form>
-  </mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </p>
+        <div class="button">
+          <button type="submit" mat-button color="accent">Login</button>
+        </div>
+      </form>
+    </div>
+    </mat-card-content>
 </mat-card>
