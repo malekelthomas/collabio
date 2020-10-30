@@ -16,7 +16,7 @@ export class UserService {
   private currentUser = 'maleke';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}),
   };
 
   getUsers(): Observable<Object> {
