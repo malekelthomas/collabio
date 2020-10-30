@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+require('dotenv/config')
 
 //middleware
 const followersRoute = require('./followers');
@@ -12,14 +14,21 @@ router.use('/:username/following', followingRoute);
 
 const auth = require('../auth');
 //const crypto = require('crypto');
-router.get('/', async (req, res) => {
-    try {
-        const users = await User.find()
-        console.log(users);
-        res.json(users);
-    } catch (err) {
-        res.json({message:err});
-    }
+router.get('/', auth, async (req, res) => {
+ 
+        jwt.verify(req.token, process.env.SECRET_KEY, async (err, decoded) => {
+            if(err){
+                req.token = null;
+                await res.status(401).send({err});
+            }else{
+                console.log("this is decoded", decoded);
+                const users = await User.find()
+                console.log(users);
+                res.json(users);
+            } 
+        })
+        
+  
 });
 
 
