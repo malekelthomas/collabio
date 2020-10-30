@@ -1,6 +1,6 @@
 import { Input, EventEmitter, Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { RegisterService } from './../register.service';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('',[Validators.required])
   });
 
-  constructor(private register: RegisterService) { }
+  constructor(private auth: AuthService) { }
 
   registration;
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.submitEm.emit(this.form.value);
-      this.register.register(this.form.value).subscribe(data=>this.registration=data);
+      this.auth.register(this.form.value).subscribe(data=>this.registration=data);
 
     }
   }
