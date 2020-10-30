@@ -21,11 +21,11 @@ router.post('/', async (req, res) => {
                 })
             }
             else{
-                res.json({message:"Login details incorrect."})
+                res.json({message:"Login details incorrect!"})
             }
         })
     }catch (err){
-        res.json({message:"Login details incorrect."})
+        res.json({message:"Login details incorrect!"})
     }
 })
 
