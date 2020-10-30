@@ -8,7 +8,7 @@ module.exports = function(req, res, next){
         next();
     }
     else{
-        console.log(bearerHeader)
         res.sendStatus(403)
+        next();
     }
 }
