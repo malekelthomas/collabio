@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
 import { User } from './../user';
 import { Input, EventEmitter, Component, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { LoginService } from '../login.service';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Token } from './../token';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,14 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent implements OnInit {
 
-  loggedIn: User = null;
+  loggedIn;
   form: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('',[Validators.required]),
+    password: new FormControl('',[Validators.required])
   });
+  token: Token = {token:""};
 
-
-  constructor(private loginS: LoginService) { }
+  constructor(private auth: AuthService, private router:Router) { }
 
   ngOnInit(): void {
     this.loggedIn;
@@ -28,9 +29,29 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.submitEm.emit(this.form.value);
-      this.loginS.login(this.form.value).subscribe();//.subscribe(user => console.log(this.loggedIn = user));
+      this.auth.login(this.form.value)
+      .subscribe(
+        res => {
+          this.loggedIn=res
+          this.checkLoggedIn()
+        }
+        );//.subscribe(user => console.log(this.loggedIn = user));
+      }
+  }
+
+  checkType(ting){
+    return typeof ting;
+  }
+
+  checkLoggedIn(){
+    if (typeof (this.loggedIn) == typeof this.token) {
+      console.log("deh yah")
+      if (!this.loggedIn.message) {
+        this.router.navigate(['/users']);
+      }
     }
   }
+
 
 
 
