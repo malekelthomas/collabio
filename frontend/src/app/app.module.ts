@@ -20,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LogoutComponent } from './logout/logout.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { RegisterComponent } from './register/register.component';
     UsersComponent,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
