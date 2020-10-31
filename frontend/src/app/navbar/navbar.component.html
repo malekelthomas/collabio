@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <span><a routerLink='/'>collab.io</a></span>
+  <span class="not-title" *ngIf="user_name"><a routerLink='/users'>{{user_name}}</a></span>
+  <span class="not-title" *ngIf="!user_name && loggedOut "><a routerLink='/login'>login</a></span>
+  <span class="not-title" *ngIf="!user_name && loggedOut"><a routerLink='/register'>register</a></span>
+  <span class="not-title" *ngIf="user_name"><a routerLink='/logout'>logout</a></span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
