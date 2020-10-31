@@ -22,7 +22,9 @@ export class UsersComponent implements OnInit {
     this.getFollowers();
   }
 
-  users;
+
+
+  user;
   followers;
 
   checkError(error: HttpErrorResponse): boolean{
@@ -37,15 +39,22 @@ export class UsersComponent implements OnInit {
 
   }
   getUser(): void {
-    this.userService.getUsers()
-      .subscribe(
-        users => this.users = users,
+    this.userService.getUser()
+      .subscribe(user => {
+        this.user = user.user_name
+        localStorage.setItem('user_name', `${user.user_name}`)
+        },
         error => this.checkError(error)
-        )
+      )
   }
 
   getFollowers(): void {
     this.userService.getFollowers()
-      .subscribe(followers => this.followers = followers, error => this.checkError(error))
-  }
+      .subscribe(followers => {
+        if(followers){
+            this.followers = followers
+          }
+        },
+        error => this.checkError(error)
+      )}
 }
