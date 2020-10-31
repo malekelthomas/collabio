@@ -1,4 +1,7 @@
-<div *ngIf="followers && user.length > 0">
+<div>
+  <p>You don't have any followers yet {{user}}</p>
+</div>
+<div *ngIf="followers && user">
   <ul class="followers">
     <li *ngFor="let follower of followers">
       <p>
@@ -6,7 +9,4 @@
       </p>
     </li>
   </ul>
-</div>
-<div>
-  <p>You don't have any followers yet {{user}}</p>
 </div>
