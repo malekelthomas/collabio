@@ -53,9 +53,9 @@ router.post('/',  async (req, res) => {
     
 });
 
-router.get('/:username', async (req,res) => {
+router.get('/:email', async (req,res) => {
     try {
-        const user = await User.find({"user_name": req.params.username});
+        const user = await User.findOne({"email": req.params.email});
         console.log(user)
         res.json(user);
     } catch (err) {
