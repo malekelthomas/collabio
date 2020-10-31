@@ -1,14 +1,16 @@
+import { Router } from '@angular/router';
 import { User } from './user';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError, tap, map} from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private userService:UserService) { }
 
   private token;
   private usersUrl = 'api/users';
@@ -20,8 +22,13 @@ export class AuthService {
   };
 
   login(credentials: User): Observable<User>{
-    this.http.post<User>(`${this.loginUrl}`, {email:credentials.email, password:credentials.password})
-      .subscribe(data => localStorage.setItem('token', data.token));
+    localStorage.setItem('email', `${credentials.email}`);
+    this.http.post<any>(`${this.loginUrl}`, {email:credentials.email, password:credentials.password})
+      .subscribe(data => {
+        if(!data.message){
+          localStorage.setItem('token', data.token)
+          }
+      });
     return this.http.post<User>(`${this.loginUrl}`, {email:credentials.email, password:credentials.password});
   }
 
@@ -33,5 +40,11 @@ export class AuthService {
 
   loggedIn(){
     return !!localStorage.getItem('token');
+  }
+
+  logout(){
+    this.userService.logout();
+    localStorage.clear();
+    this.router.navigate(['/'])
   }
 }
