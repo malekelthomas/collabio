@@ -3,6 +3,7 @@ import { UserService } from '../user.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -19,13 +20,18 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.getFollowers();
+    //this.getFollowers();
+    console.log(this.route.snapshot)
   }
 
 
 
   user;
-  followers;
+  loggedIn;
+  followers = [];
+  following = [];
+  currentUserFollowing;
+  checkoutUser;
 
   checkError(error: HttpErrorResponse): boolean{
     if (error instanceof HttpErrorResponse){
@@ -38,23 +44,51 @@ export class UsersComponent implements OnInit {
     }
 
   }
+
   getUser(): void {
-    this.userService.getUser()
-      .subscribe(user => {
-        this.user = user.user_name
-        localStorage.setItem('user_name', `${user.user_name}`)
-        },
-        error => this.checkError(error)
-      )
+    this.route.queryParams.subscribe(val => {
+      this.loggedIn = localStorage.getItem('user_name');
+      if(val.user_name){
+        this.userService.getSearchedUser(val.user_name)
+          .subscribe(user => {
+            this.user = user.user_name;
+            this.followers = user.followers;
+            this.following = user.following;
+            if(user.followers.includes(this.loggedIn)){
+              this.currentUserFollowing = true;
+            }
+          })
+      }
+      else{
+        this.userService.getUser()
+          .subscribe(user => {
+            this.loggedIn = localStorage.getItem('user_name');
+            this.user = user.user_name;
+            this.followers = user.followers;
+            this.following = user.following;
+            },
+            error => this.checkError(error)
+          )
+      }
+  });
+}
+
+
+  follow(){
+    console.log(this.user)
+    this.userService.follow(this.user)
+      .subscribe(val => {
+        this.router.navigate(['/users'], {queryParams:{user_name:this.user}})
+      });
+
+
   }
 
-  getFollowers(): void {
-    this.userService.getFollowers()
-      .subscribe(followers => {
-        if(followers){
-            this.followers = followers
-          }
-        },
-        error => this.checkError(error)
-      )}
+  unfollow(){
+    console.log(this.user)
+    this.userService.unfollow(this.user)
+    .subscribe(val => {
+      this.router.navigate(['/users'], {queryParams:{user_name:this.user}})
+    });
+  }
 }
