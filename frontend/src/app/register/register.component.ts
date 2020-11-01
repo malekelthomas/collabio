@@ -1,5 +1,6 @@
 import { Input, EventEmitter, Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('',[Validators.required])
   });
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router:Router) { }
 
   registration;
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       this.submitEm.emit(this.form.value);
       this.auth.register(this.form.value).subscribe(data=>this.registration=data);
+      this.router.navigate(['/login']);
 
     }
   }
