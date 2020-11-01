@@ -22,6 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { PostComponent } from './post/post.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     RegisterComponent,
     LogoutComponent,
     NavbarComponent,
+    UserSearchComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
