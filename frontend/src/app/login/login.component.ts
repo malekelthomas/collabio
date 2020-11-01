@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
           this.loggedIn=res
           this.checkLoggedIn()
         }
-        );//.subscribe(user => console.log(this.loggedIn = user));
+        );
       }
   }
 
