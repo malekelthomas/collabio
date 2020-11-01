@@ -9,8 +9,8 @@ require('dotenv/config')
 //middleware
 const followersRoute = require('./followers');
 const followingRoute = require('./following');
-router.use('/:username/followers', followersRoute);
-router.use('/:username/following', followingRoute);
+router.use('/user/:username/followers', followersRoute);
+router.use('/user/:username/following', followingRoute);
 
 const auth = require('../auth');
 //const crypto = require('crypto');
@@ -53,7 +53,7 @@ router.post('/',  async (req, res) => {
     
 });
 
-router.get('/:email', async (req,res) => {
+router.get('/user/searchByEmail/:email', async (req,res) => {
     try {
         const user = await User.findOne({"email": req.params.email});
         console.log(user)
@@ -65,7 +65,7 @@ router.get('/:email', async (req,res) => {
 })
 
 
-router.delete('/:username', async (req,res) => {
+router.delete('/user/searchByUser/:username', async (req,res) => {
     try {
         const removedUser = await User.deleteOne({user_name: req.params.username});
         console.log(removedUser)
@@ -76,7 +76,7 @@ router.delete('/:username', async (req,res) => {
     }
 })
 
-router.patch('/updateUserName/:username', async (req,res) => {
+router.patch('/user/updateUserName/:username', async (req,res) => {
     try {
         console.log(req.params.username)
         console.log(req.body.user_name)
@@ -89,7 +89,7 @@ router.patch('/updateUserName/:username', async (req,res) => {
     }
 })
 
-router.patch('/updateFirstName/:firstname', async (req,res) => {
+router.patch('/user/updateFirstName/:firstname', async (req,res) => {
     try {
         console.log(req.params.firstname)
         console.log(req.body.first_name)
@@ -102,7 +102,7 @@ router.patch('/updateFirstName/:firstname', async (req,res) => {
     }
 })
 
-router.patch('/updateLastName/:lastname', async (req,res) => {
+router.patch('/user/updateLastName/:lastname', async (req,res) => {
     try {
         console.log(req.params.lastname)
         console.log(req.body.last_name)
@@ -113,6 +113,24 @@ router.patch('/updateLastName/:lastname', async (req,res) => {
         res.json({message: err});
 
     }
+})
+
+router.get('/findUser/searchUser', async (req,res) =>{
+    try{
+        let searchTerm;
+        if(req.query.user_name){
+                searchTerm = req.query.user_name;
+                const users = await User.find({"user_name": {"$regex":`${searchTerm}`,"$options":"i"}}, (err, docs) => { //match usernames that contain search term
+                });
+                res.json(users)
+            }
+            else{
+                res.json({message:"enter search"})
+            }
+        }
+        catch (err) {
+            res.json({message:err})
+        }
 })
 
 
