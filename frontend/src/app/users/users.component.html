@@ -1,12 +1,25 @@
-<div>
-  <p>You don't have any followers yet {{user}}</p>
+<div *ngIf="loggedIn.length > 0">
+  <div class="profile">
+    <div class="user">
+      <div class="user-info">
+        <div class="user-name">
+          <p>{{user}}</p>
+        </div>
+        <div class="follower-info">
+          <p class="followers-count">Followers: {{followers.length}}</p>
+          <p class="following-count">Following: {{following.length}}</p>
+        </div>
+        </div>
+        <div class="follow-button" *ngIf="loggedIn !== user">
+          <button mat-button *ngIf="!currentUserFollowing" (click)="follow();">
+            <span>Follow</span>
+          </button>
+          <button mat-button *ngIf="currentUserFollowing" (click)="unfollow();">
+            <span>Unfollow</span>
+          </button>
+        </div>
+
+    </div>
+  </div>
 </div>
-<div *ngIf="followers && user">
-  <ul class="followers">
-    <li *ngFor="let follower of followers">
-      <p>
-        {{follower.user_name | titlecase}} {{follower.last_name | titlecase}}
-      </p>
-    </li>
-  </ul>
-</div>
+
