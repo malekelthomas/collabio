@@ -23,20 +23,28 @@ export class UserService {
   };
 
   getUser(): Observable<User> {
-      if(localStorage.getItem('email')){
-        this.http.get<User>(`${this.usersUrl}/${localStorage.getItem('email')}`, this.httpOptions)
-        .subscribe(user => {
-          this.loggedInName.emit(user.user_name)
-        })
-        return this.http.get<User>(`${this.usersUrl}/${localStorage.getItem('email')}`, this.httpOptions);
-      }
+    if(localStorage.getItem('email')){
+      this.http.get<User>(`${this.usersUrl}/user/searchByEmail/${localStorage.getItem('email')}`, this.httpOptions)
+      .subscribe(user => {
+        this.loggedInName.emit(user.user_name)
+      })
+      return this.http.get<User>(`${this.usersUrl}/user/SearchByEmail/${localStorage.getItem('email')}`, this.httpOptions);
+    }
   }
 
   getFollowers(): Observable<Object> {
 
-    return this.http.get(`${this.usersUrl}/${this.currentUser}/${this.followersUrl}`);
+    return this.http.get(`${this.usersUrl}/user/${this.user.user_name}/${this.followersUrl}`);
   }
 
+
+  searchUsers(term: string): Observable<User[]> {
+    if (!term.trim()){
+      return of([]);
+    }
+
+    return this.http.get<User[]>(`${this.usersUrl}/findUser/searchUser?user_name=${term}`);
+  }
 
   logout(){
     this.loggedInName.emit('logged out');
