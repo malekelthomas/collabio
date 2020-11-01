@@ -26,10 +26,15 @@ export class UserService {
     if(localStorage.getItem('email')){
       this.http.get<User>(`${this.usersUrl}/user/searchByEmail/${localStorage.getItem('email')}`, this.httpOptions)
       .subscribe(user => {
-        this.loggedInName.emit(user.user_name)
+        localStorage.setItem('user_name', user.user_name);
+        this.loggedInName.emit(user.user_name);
       })
       return this.http.get<User>(`${this.usersUrl}/user/SearchByEmail/${localStorage.getItem('email')}`, this.httpOptions);
     }
+  }
+
+  getSearchedUser(user_name: string): Observable<any> {
+    return this.http.get<any>(`${this.usersUrl}/user/searchByUser/${user_name}`);
   }
 
   getFollowers(): Observable<Object> {
@@ -44,6 +49,15 @@ export class UserService {
     }
 
     return this.http.get<User[]>(`${this.usersUrl}/findUser/searchUser?user_name=${term}`);
+  }
+
+
+  follow(user: string){
+    return this.http.post(`${this.usersUrl}/user/${localStorage.getItem('user_name')}/followers/add`, {follower:user});
+  }
+
+  unfollow(user:string){
+    return this.http.delete(`${this.usersUrl}/user/${localStorage.getItem('user_name')}/followers/remove/${user}`)
   }
 
   logout(){
