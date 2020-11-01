@@ -1,5 +1,8 @@
 <mat-toolbar color="primary">
   <span><a routerLink='/'>collab.io</a></span>
+  <div>
+    <app-user-search></app-user-search>
+  </div>
   <span class="not-title" *ngIf="user_name"><a routerLink='/users'>{{user_name}}</a></span>
   <span class="not-title" *ngIf="!user_name && loggedOut "><a routerLink='/login'>login</a></span>
   <span class="not-title" *ngIf="!user_name && loggedOut"><a routerLink='/register'>register</a></span>
