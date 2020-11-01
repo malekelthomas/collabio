@@ -1,0 +1,35 @@
+#search-component{
+  padding: 0.5em;
+}
+
+#search-box {
+  width: 10em;
+  height: 1.25em;
+}
+
+.search-result li{
+  border-bottom: 1px solid red;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+  list-style-type: none;
+  width: 15em;
+  height: 1.5em;
+  background-color: white;
+    a{
+      color: black !important;
+      display: block;
+      text-decoration: none;
+    }
+
+}
+
+
+.search-result li:hover {
+  background-color: #eaf2f7;
+}
+
+ul.search-result{
+  margin-top:0;
+  padding-left: 0.5em;
+}
+
