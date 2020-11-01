@@ -65,6 +65,17 @@ router.get('/user/searchByEmail/:email', async (req,res) => {
 })
 
 
+router.get('/user/searchByUser/:username', async (req,res) => {
+    try {
+        const user = await User.findOne({user_name: req.params.username});
+        console.log(user)
+        res.json(user)
+    } catch (err) {
+        res.json({message: err});
+
+    }
+})
+
 router.delete('/user/searchByUser/:username', async (req,res) => {
     try {
         const removedUser = await User.deleteOne({user_name: req.params.username});
