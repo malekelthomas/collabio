@@ -1,0 +1,24 @@
+
+.profile{
+  display: flex;
+  justify-content: center;
+  .user {
+    padding: 1em;
+    p{
+      padding: 0 0.2em 0 0.2em;
+    }
+    .user-info{
+      display:flex;
+      .follower-info{
+        display: flex;
+      }
+
+    }
+    .follow-button{
+      display: flex;
+      justify-content: center;
+    }
+
+  }
+
+}
