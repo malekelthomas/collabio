@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UserService } from '../user.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,19 +10,23 @@ import { subscribeOn } from 'rxjs/operators';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit{
 
+
+  subscription;
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router) { }
+    private router: Router) {}
 
   ngOnInit(): void {
     this.getUser();
-    //this.getFollowers();
-    console.log(this.route.snapshot)
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    }
   }
+
 
 
 
@@ -47,11 +51,11 @@ export class UsersComponent implements OnInit {
 
   getUser(): void {
     this.route.queryParams.subscribe(val => {
-      this.loggedIn = localStorage.getItem('user_name');
-      if(val.user_name){
+      this.loggedIn = localStorage.getItem('user_name'); // currently logged in user
+      if(val.user_name){ //if querying for another user
         this.userService.getSearchedUser(val.user_name)
           .subscribe(user => {
-            this.user = user.user_name;
+            this.user = user.user_name; // set user to searched user
             this.followers = user.followers;
             this.following = user.following;
             if(user.followers.includes(this.loggedIn)){
@@ -59,7 +63,7 @@ export class UsersComponent implements OnInit {
             }
           })
       }
-      else{
+      else{ //if on the logged in user's home page
         this.userService.getUser()
           .subscribe(user => {
             this.loggedIn = localStorage.getItem('user_name');
@@ -76,19 +80,15 @@ export class UsersComponent implements OnInit {
 
   follow(){
     console.log(this.user)
-    this.userService.follow(this.user)
-      .subscribe(val => {
-        this.router.navigate(['/users'], {queryParams:{user_name:this.user}})
-      });
+    this.userService.follow(this.user).subscribe();
+    this.router.navigate(['/users'], {queryParams:{user_name:this.user}});
 
 
   }
 
   unfollow(){
     console.log(this.user)
-    this.userService.unfollow(this.user)
-    .subscribe(val => {
-      this.router.navigate(['/users'], {queryParams:{user_name:this.user}})
-    });
+    this.userService.unfollow(this.user).subscribe();
+    this.router.navigate(['/users'], {queryParams:{user_name:this.user}});
   }
 }
