@@ -9,7 +9,7 @@ import { LogoutComponent } from './logout/logout.component';
 
 
 export const routes: Routes = [
-  {path: 'users', component: UsersComponent, canActivate:[AuthGuard], resolve:{data:ResolverService}},
+  {path: 'users', component: UsersComponent, canActivate:[AuthGuard], resolve:{data:ResolverService}, runGuardsAndResolvers:'always'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'logout', component: LogoutComponent}
@@ -17,7 +17,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
