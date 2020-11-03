@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Comment = require('./Comment').InitComment.schema;
+
 
 
 const PostSchema = mongoose.Schema({
@@ -7,14 +9,17 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    comments: Array,
+    comments: [Comment],
     postType: String,
     timePosted: {
         type: Date,
         default: Date.now
     },
     likes: Number,
-    post_content: {}
+    post_content: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true
+    }
 
 });
 
