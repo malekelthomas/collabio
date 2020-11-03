@@ -37,6 +37,8 @@ export class UsersComponent implements OnInit{
   currentUserFollowing;
   checkoutUser;
 
+  posts = [];
+
   checkError(error: HttpErrorResponse): boolean{
     if (error instanceof HttpErrorResponse){
       this.router.navigate(['/login']);
@@ -90,5 +92,10 @@ export class UsersComponent implements OnInit{
     console.log(this.user)
     this.userService.unfollow(this.user).subscribe();
     this.router.navigate(['/users'], {queryParams:{user_name:this.user}});
+  }
+
+
+  getPosts(){
+    //
   }
 }
