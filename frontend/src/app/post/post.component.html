@@ -1,6 +1,6 @@
 <div class="posts">
   <div *ngFor="let post of posts">
-    <mat-card>
+    <mat-card [ngClass]="loadedComments ? 'card extended':'card'">
       <mat-card-title>{{post.author}}</mat-card-title>
       <mat-card>
         <mat-card-content class="post_content">{{post.post_content}}</mat-card-content>
@@ -10,9 +10,9 @@
         {{post.post_caption}}
         <mat-card-content class="total-comments" (click)="loadComments();" *ngIf="!loadedComments">View all {{post.comments.length}} comments</mat-card-content>
       </mat-card-content>
-      <div *ngIf="loadedComments">
+      <div class="comments-container" *ngIf="loadedComments">
         <div class="comments">
-          <div *ngFor="let comment of comments | keyvalue" [ngClass]="loadedComments ? 'loaded-comments clicked':'loaded-comments'">
+          <div *ngFor="let comment of comments | keyvalue">
             <mat-card-content class="comment-author" *ngIf="comment.key == 'author'">
               {{comment.value}}
             </mat-card-content>

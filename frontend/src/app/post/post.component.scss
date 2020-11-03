@@ -7,10 +7,17 @@
   padding:0 0.3em 0 0;
 }
 
-.loaded-comments.clicked{
-  transition: 5s ease-out;
-}
 
+.card{
+  height: 300px;
+  transition: 0.5s ease-in-out;
+}
+.comments-container{
+  transition: 0.5s ease-in-out;
+}
+.card.extended{
+  height: 370px;
+}
 .comments{
   display: flex;
   flex-direction: row;
@@ -22,3 +29,5 @@
 .comment {
   padding:0 0 0 0.3em;
 }
+
+
