@@ -9,9 +9,10 @@ require('dotenv/config')
 //middleware
 const followersRoute = require('./followers');
 const followingRoute = require('./following');
+const postsRoute = require('./posts');
 router.use('/user/:username/followers', followersRoute);
 router.use('/user/:username/following', followingRoute);
-
+router.use('/user/:username/posts', postsRoute);
 const auth = require('../auth');
 //const crypto = require('crypto');
 router.get('/', auth, async (req, res) => {
