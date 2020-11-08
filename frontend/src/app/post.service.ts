@@ -20,7 +20,11 @@ export class PostService {
   };
 
   getPosts(): Observable<Post>{
-    return this.http.get<Post>(`${this.usersUrl}/user/${localStorage.getItem('user_name')}/posts`)
+    return this.http.get<Post>(`${this.usersUrl}/user/${localStorage.getItem('user_name')}/posts`);
+  }
+
+  createPost(post: Post): Observable<Post>{
+    return this.http.post<Post>(`${this.usersUrl}/user/${localStorage.getItem('user_name')}/posts/create`, post);
   }
 
 }
