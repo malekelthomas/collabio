@@ -5,18 +5,40 @@
       <form [formGroup]="form" (ngSubmit)="submit()">
         <p>
           <mat-form-field>
-            <input type="text" matInput placeholder="Caption" formControlName="post_caption">
+            <textarea type="text" matInput placeholder="Caption" formControlName="post_caption"></textarea>
           </mat-form-field>
         </p>
         <div>
           <p>Select Post Type:</p>
           <p>
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-              <mat-button-toggle value="Artwork">Artwork</mat-button-toggle>
-              <mat-button-toggle value="Project">Project</mat-button-toggle>
-              <mat-button-toggle value="Song">Song</mat-button-toggle>
+              <mat-button-toggle (click)="selectPostType('artwork')">Artwork</mat-button-toggle>
+              <mat-button-toggle (click)="selectPostType('project')">Project</mat-button-toggle>
+              <mat-button-toggle (click)="selectPostType('song')">Song</mat-button-toggle>
             </mat-button-toggle-group>
           </p>
+          <input type="hidden" formControlName="post_type">
+          <div *ngIf="postOptions.artwork">
+            <p>Upload image:</p>
+            <p>
+              <input type="file" formControlName="post_content">
+            </p>
+          </div>
+          <div *ngIf="postOptions.project">
+            <mat-form-field>
+              <input #projectUrl type="text" matInput placeholder="Project Url:" (change)="fillForm('project','projectUrl', projectUrl.value)">
+            </mat-form-field>
+            <p>Upload Image:</p>
+            <p>
+              <input #projectImage type="file" (change)="fillForm('project','projectImage',$event)">
+            </p>
+          </div>
+          <div *ngIf="postOptions.song">
+            <p>Upload song:</p>
+            <p>
+              <input type="file" formControlName="post_content">
+            </p>
+          </div>
         </div>
         <div class="button">
           <button type="submit" mat-button color="accent">Post</button>
