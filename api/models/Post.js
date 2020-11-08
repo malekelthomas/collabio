@@ -10,7 +10,10 @@ const PostSchema = mongoose.Schema({
         required: true
     },
     comments: [Comment],
-    postType: String,
+    post_type: {
+        type:String,
+        required: true
+    },
     timePosted: {
         type: Date,
         default: Date.now

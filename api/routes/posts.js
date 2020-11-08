@@ -21,12 +21,13 @@ router.use('/:post_id/comments', commentsRoute);
      const post = new Post({
          post_caption: req.body.post_caption,
          author: req.params.username,
-         postType: req.body.postType,
+         post_type: req.body.post_type,
          post_content: req.body.post_content
         });
         
     try {
         const savedPost = await post.save();
+        console.log(post.post_type)
         res.json(savedPost);
      } catch (err) {
          res.json({message:err});
