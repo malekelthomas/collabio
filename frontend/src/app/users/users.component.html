@@ -25,5 +25,8 @@
   <div class="content" *ngIf="loggedIn == user">
     <app-post></app-post>
   </div>
+  <div class="create-post" *ngIf="loggedIn == user">
+    <app-create-post></app-create-post>
+  </div>
 </div>
 
