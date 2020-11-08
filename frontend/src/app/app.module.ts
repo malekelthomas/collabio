@@ -7,6 +7,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { PostComponent } from './post/post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 @NgModule({
@@ -36,6 +40,7 @@ import { PostComponent } from './post/post.component';
     NavbarComponent,
     UserSearchComponent,
     PostComponent,
+    CreatePostComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,9 @@ import { PostComponent } from './post/post.component';
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonToggleModule,
+    ClickOutsideModule
 
   ],
   providers: [AuthGuard
