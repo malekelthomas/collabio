@@ -22,12 +22,13 @@
   }
 
 }
-
+app-post{
+  width: 100%;
+}
 .content{
   display: flex;
   justify-content: flex-start;
-  margin: 10%;
-  width: 20em;
+
 }
 
 .create-post{
