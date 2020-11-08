@@ -1,0 +1,29 @@
+<mat-card #createPost *ngIf="create" (clickOutside)="onClickedOutside($event)">
+  <mat-card-title color="accent">Create Post</mat-card-title>
+  <mat-card-content #postContent>
+    <div class="form">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Caption" formControlName="post_caption">
+          </mat-form-field>
+        </p>
+        <div>
+          <p>Select Post Type:</p>
+          <p>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle value="Artwork">Artwork</mat-button-toggle>
+              <mat-button-toggle value="Project">Project</mat-button-toggle>
+              <mat-button-toggle value="Song">Song</mat-button-toggle>
+            </mat-button-toggle-group>
+          </p>
+        </div>
+        <div class="button">
+          <button type="submit" mat-button color="accent">Post</button>
+        </div>
+      </form>
+    </div>
+    </mat-card-content>
+</mat-card>
+
+<button #createPostButton *ngIf="!create">Create Post +</button>
