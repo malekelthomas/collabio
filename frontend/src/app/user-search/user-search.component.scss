@@ -5,12 +5,14 @@
 #search-box {
   width: 10em;
   height: 1.25em;
+  border-radius: 15em;
+  margin-top: 2em;
 }
 
 .search-result li{
-  border-bottom: 1px solid red;
-  border-left: 1px solid red;
-  border-right: 1px solid red;
+  border-bottom: 1px solid rgb(138, 114, 206);
+  border-left: 1px solid  rgb(138, 114, 206);
+  border-right: 1px solid  rgb(138, 114, 206);
   list-style-type: none;
   width: 15em;
   height: 1.5em;
@@ -32,4 +34,6 @@ ul.search-result{
   margin-top:0;
   padding-left: 0.5em;
 }
+
+
 
