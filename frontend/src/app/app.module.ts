@@ -28,7 +28,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { PostComponent } from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ClickOutsideModule } from 'ng-click-outside';
-
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
     MatFormFieldModule,
     MatInputModule,
     MatButtonToggleModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    MatSelectModule
 
   ],
   providers: [AuthGuard
