@@ -11,12 +11,15 @@ import { AuthService } from './../auth.service';
 export class RegisterComponent implements OnInit {
 
 
+  account_types = ["artist", "developer", "musician"]
+
   form: FormGroup = new FormGroup({
     email: new FormControl('',[Validators.required]),
     user_name: new FormControl('',[Validators.required]),
     first_name: new FormControl('',[Validators.required]),
     last_name: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required])
+    password: new FormControl('',[Validators.required]),
+    user_type: new FormControl('',[Validators.required])
   });
 
   constructor(private auth: AuthService, private router:Router) { }
