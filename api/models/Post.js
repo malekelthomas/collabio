@@ -18,7 +18,7 @@ const PostSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    likes: Number,
+    likes: Array,
     post_content: {
         type: mongoose.Schema.Types.Mixed,
         required: true

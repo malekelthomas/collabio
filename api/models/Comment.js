@@ -11,7 +11,7 @@ const baseCommentSchema = mongoose.Schema({
         default: Date.now
     },
     comment:String,
-    likes: Number,
+    likes: Array,
 });
 
 const CommentSchema = mongoose.Schema({
@@ -27,7 +27,7 @@ const CommentSchema = mongoose.Schema({
         default: Date.now
     },
     comment: String,
-    likes: Number,
+    likes: Array,
 });
 
 
