@@ -32,6 +32,7 @@ export class UsersComponent implements OnInit{
 
 
   user;
+  user_type;
   loggedIn;
   followers = [];
   following = [];
@@ -58,6 +59,7 @@ export class UsersComponent implements OnInit{
         this.userService.getSearchedUser(val.user_name)
           .subscribe(user => {
             this.user = user.user_name; // set user to searched user
+            this.user_type = user.user_type;
             this.followers = user.followers;
             this.following = user.following;
             if(user.followers.includes(this.loggedIn)){
@@ -70,6 +72,7 @@ export class UsersComponent implements OnInit{
           .subscribe(user => {
             this.loggedIn = localStorage.getItem('user_name');
             this.user = user.user_name;
+            this.user_type = user.user_type;
             this.followers = user.followers;
             this.following = user.following;
             },

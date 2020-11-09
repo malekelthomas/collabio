@@ -22,6 +22,12 @@
   }
 
 }
+.account_type{
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+  color: rgb(78, 85, 92)
+}
 app-post{
   width: 100%;
 }

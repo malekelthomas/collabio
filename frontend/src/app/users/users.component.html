@@ -10,6 +10,9 @@
           <p class="following-count">Following: {{following.length}}</p>
         </div>
         </div>
+        <div class="account_type">
+          {{user_type}}
+        </div>
         <div class="content" *ngIf="loggedIn !== user">
           <div class="follow-button">
             <button mat-button *ngIf="!currentUserFollowing" (click)="follow();">
