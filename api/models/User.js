@@ -29,6 +29,9 @@ const UserSchema = mongoose.Schema({
     },
     following: {
         type: Array 
+    },
+    user_type: {
+        type: Array
     }
 });
 
