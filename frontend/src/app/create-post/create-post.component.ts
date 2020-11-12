@@ -28,9 +28,9 @@ export class CreatePostComponent implements OnInit {
 
     this.renderer.listen('window', 'click', (e:Event) =>{ //monitoring clicks on the page
 
-      //console.log(e.target, this.createPost, this.create)
+      console.log(e.target, this.createPostButton.nativeElement, this.create)
       if(this.createPostButton){
-        if(e.target == this.createPostButton.nativeElement){
+        if(e.target == this.createPostButton.nativeElement.children[0]){
           this.create = !this.create;
 
         }
