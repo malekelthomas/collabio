@@ -56,4 +56,17 @@ export class PostComponent implements OnInit {
     })
   }
 
+  like(e){
+    console.log(e.target.style.color)
+    if(e.target.style.color == "red"){
+      e.target.style.color = "grey";
+    }
+    else if(e.target.style.color == "" || e.target.style.color == "grey"){
+      e.target.style.color = "red";
+    }
+  }
+
+  delete(){
+    alert("Are you sure?");
+  }
 }

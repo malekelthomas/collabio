@@ -1,3 +1,10 @@
+mat-card-title{
+  font-size: small;
+}
+
+.post-author-caption{
+  font-weight: 500;
+}
 .posts{
   display: flex;
   flex-wrap: wrap;
@@ -17,17 +24,24 @@
 .post_caption > span {
   padding:0 0.3em 0 0;
 }
-
-
+.title{
+  display: flex;
+}
+.delete-button{
+  margin: 0 auto;
+}
+.like{
+  color:grey;
+}
 .card{
-  height: 320px;
+  height: 350px;
   transition: 0.5s ease-in-out;
 }
 .comments-container{
   transition: 0.5s ease-in-out;
 }
 .card.extended{
-  height: 370px;
+  height: 400px;
 }
 .comments{
   display: flex;
