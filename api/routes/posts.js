@@ -3,6 +3,7 @@
  const router = express.Router({mergeParams: true});
 
 const Post = require('../models/Post');
+const { post } = require('./comments');
 
 const commentsRoute = require('./comments');
 router.use('/:post_id/comments', commentsRoute);
@@ -33,6 +34,30 @@ router.use('/:post_id/comments', commentsRoute);
          res.json({message:err});
          
      }
+ })
+
+ router.put('/like', async(req,res) => {
+    const postToUpdate = await Post.findOne({"_id": req.body.post._id}, (post_err, post_doc) =>{
+        if(post_doc.likes.length == 0 || !post_doc.likes.includes(req.body.liker)){
+            post_doc.likes.push(req.body.liker);
+            post_doc.save()
+            console.log(post_doc)
+        }
+    });
+    //console.log(postToUpdate)
+ })
+ router.put('/unlike', async(req,res) => {
+    const postToUpdate = await Post.findOne({"_id": req.body.post._id}, (post_err, post_doc) =>{
+        if(post_doc.likes.includes(req.body.unliker)){
+            const index = post_doc.likes.indexOf(req.body.unliker)
+            if(index > -1){
+                post_doc.likes.splice(index, 1);
+            }
+            post_doc.save()
+            console.log(post_doc)
+        }
+    });
+    //console.log(postToUpdate)
  })
 
 

@@ -22,12 +22,12 @@
         <mat-card-content class="post_caption">
           <span class="post-author-caption">{{post.author}}</span>
           {{post.post_caption}}
-          <button class="like" (click)="like($event);" mat-icon-button aria-label="Example icon button with a heart icon">
+          <button class="like" [ngStyle]="post.likes.includes(currentLoggedInUser) && {'color':'red'}" (click)="like($event, post);" mat-icon-button aria-label="Example icon button with a heart icon">
             <mat-icon>favorite</mat-icon>
           </button>
-          <mat-card-content class="total-comments" (click)="loadComments();" *ngIf="!loadedComments">View all {{post.comments.length}} comments</mat-card-content>
+          <mat-card-content class="total-comments" (click)="loadComments(post);" *ngIf="!loadedComments">View all {{post.comments.length}} comments</mat-card-content>
         </mat-card-content>
-        <div class="comments-container" *ngIf="loadedComments">
+        <div class="comments-container" *ngIf="post.loadedComments">
           <div class="comments">
             <div *ngFor="let comment of comments | keyvalue">
               <mat-card-content class="comment-author" *ngIf="comment.key == 'author'">{{comment.value}}</mat-card-content>
